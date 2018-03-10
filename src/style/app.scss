@@ -1,0 +1,33 @@
+body {
+    margin : 0;
+    padding: 0;
+    display: inline;
+}
+#navbar {
+    list-style-type: none;
+    margin : 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #568bcd;
+}
+div {
+    padding:0;
+    margin: 0;
+}
+
+#navbar > li {
+    display: block;
+    float: left;
+    padding: 0;
+    margin : 0;
+}
+#navbar > li > a {
+    display: block;
+    text-decoration: none;
+    padding: 14px 16px;
+    margin : 0;
+}
+#navbar > li > a:hover {
+    background-color: #555;
+    color:white;
+}
