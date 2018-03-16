@@ -1,16 +1,17 @@
-import { createStore , combineReducers , applyMiddleware } from 'redux';
+import { createStore , combineReducers , applyMiddleware, compose } from 'redux';
 import updateReducer from "./reducers/index";
-import filebarReducer from "./reducers/filebar";
 import thunk from "redux-thunk";
-
 const reducer = combineReducers({
     updateReducer,
-    filebarReducer
 });
+    
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
     reducer,
-    applyMiddleware(thunk)
+    composeEnhancers(
+        applyMiddleware(thunk)
+    )
 );
 
 export default store;

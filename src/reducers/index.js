@@ -1,80 +1,156 @@
-import { UPDATE_CODE ,ADD_NEW_FILE_OR_FOLDER, ADD_NEW_FILE_OR_FOLDER_INPUT, ADD_NEW_FILE_OR_FOLDER_INPUT_SAVE, REMOVE_FILE_OR_FOLDER, ACTIVATE_EDITING_FILE, CHANGING_EDITING_FILE} from "./../type/message";
+import * as type from "./../type/message";
 
 const initial_state = {
     Root: {
         type : 'folder',
+        index: {
+            type : 'folder',
+            index : {
+                type: 'file',
+                ext : 'html',
+                code : ''
+            },
+            app : {
+                type : 'file',
+                ext : 'js',
+                code : `const initial_state = {
+                    Root: {
+                        type : 'folder',
+                        index: {
+                            type : 'folder',
+                            index : {
+                                type: 'file',
+                                ext : 'html',
+                                code : ''
+                            },
+                            app : {
+                                type : 'file',
+                                ext : 'js',
+                                code : '' 
+                            } 
+                        },
+                        reducer : {
+                            type : 'folder',
+                            reducer: {
+                                type : 'file',
+                                ext : 'js',
+                                code : ''
+                            }
+                        }
+                    },
+                    activePath: [],
+                    path: []
+                };` 
+            } 
+        },
+        reducer : {
+            type : 'folder',
+            reducer: {
+                type : 'file',
+                ext : 'js',
+                code : ''
+            }
+        }
     },
+    activePath: [],
     path: []
 };
 
 export default (state = initial_state, action) => {
     switch (action.type) {
-        case UPDATE_CODE:
+        case type.ADD_TO_FILEBAR:
         {
-            return {code: action.payload };          
+            let a = false;
+            const newState = Object.assign({}, state);
+            const path = newState.path;
+            for(var i=0;i<path.length; i++) {
+                if(action.payload.equals(path[i])) {
+                    a = true;
+                    break;
+                }
+            }
+            if (!a) {
+                return Object.assign(newState,{path: [...path,action.payload]});  
+            } 
+            else {
+                return Object.assign(newState,{path: path});  ;
+            }         
             break;
         }
-        case ACTIVATE_EDITING_FILE:
+        case type.REMOVE_FROM_FILEBAR:
         {
-            const newPath = Object.assign({},state);
-            newPath.path = action.payload;
-            return newPath;
+            const newState = Object.assign({}, state);
+            const path = [...newState.path];
+            const newPaths = path.filter(p => !(p.equals(action.payload)));
+            let activePath = newState.activePath;
+            if (newState.activePath.equals(action.payload)) {
+                activePath = [];
+            }
+            return Object.assign(newState,{ path: newPaths,activePath: activePath });
             break;
         }
-        case CHANGING_EDITING_FILE:
+        case type.ACTIVATE_EDITING_FILE:
         {
-            const stateCopy = Object.assign({}, state);
-            const pathCopy = stateCopy.path;
-            let objCopy = stateCopy;
+            const newState = Object.assign({},state);
+            newState.activePath = action.payload;
+            return newState;
+            break;
+        }
+
+        case type.CHANGING_EDITING_FILE:
+        {
+            const newState = Object.assign({}, state);
+            const pathCopy = newState.activePath;
+            let objCopy = newState;
             for(var i=0; i<pathCopy.length; i++) {
                 objCopy = objCopy[pathCopy[i]];
             }
             objCopy.code = action.payload;
-            return stateCopy;
+            console.log(action.payload);
+            return newState;
             break;
         }
-        case ADD_NEW_FILE_OR_FOLDER:
+
+        case type.ADD_NEW_FILE_OR_FOLDER:
         {
             const newState = Object.assign({},state);
             let obj = newState;
             const path = action.payload;
-            console.log(path);
-            console.log(obj);
             for(var i=0; i<path.length; i++) {
                 obj = obj[path[i]];
-                console.log(obj);
             }
             obj["input"] = '';
             return newState;
             break;
         }
-        case ADD_NEW_FILE_OR_FOLDER_INPUT:
+
+        case type.ADD_NEW_FILE_OR_FOLDER_INPUT:
         {
             const newState = Object.assign({}, state);
-            let arr = newState;
-            const pat = action.payload;
-            for(var i=0; i<pat.length; i++) {
-                arr = arr[pat[i]];
+            let reqObj = newState;
+            const path = action.payload;
+            for(var i=0; i<path.length; i++) {
+                reqObj = reqObj[path[i]];
             }
-            arr["input"] = action.value
+            reqObj["input"] = action.value
             return newState;
             break;
         }
-        case ADD_NEW_FILE_OR_FOLDER_INPUT_SAVE:
+
+        case type.ADD_NEW_FILE_OR_FOLDER_INPUT_SAVE:
         {
-            const newSta = Object.assign({}, state);
-            let ar = newSta;
-            const road = action.payload;
-            for(var i=0; i<road.length; i++) {
-                ar = ar[road[i]];
+            const newState = Object.assign({}, state);
+            let reqObj = newState;
+            const path = action.payload;
+            for(var i=0; i<path.length; i++) {
+                reqObj = reqObj[path[i]];
             }
-            const value = ar['input'];
-            console.log(value);
+            const value = reqObj['input'];
             if(action.folder) {
                 const folder = {
                     type: 'folder'
                 };
-                ar[value] = folder;
+                reqObj[value] = folder;
             }
             if(!action.folder) {
                 const ext = value.split('.');
@@ -83,31 +159,38 @@ export default (state = initial_state, action) => {
                     ext : ext[ext.length-1],
                     code : ''
                 }
-                ar[ext[0]] = file;
+                reqObj[ext[0]] = file;
             }
-            delete ar.input;
-            return newSta;
+            delete reqObj.input;
+            return newState;
             break;
         }
-        case REMOVE_FILE_OR_FOLDER:
-        {
-            const newSt = Object.assign({}, initial_state);
-            let a = newSt;
-            let b;
-            const roa = action.payload;
-            for(var i=0; i<roa.length; i++) {
-                b = a;
-                a = a[roa[i]];
-            }
-            if (roa[roa.length-1] != 'Root') {
-                delete b[roa[roa.length-1]];
-            }
-            console.log(b);
-            return newSt;
-            break; 
-        }          
-            
 
+        case type.REMOVE_FILE_OR_FOLDER:
+        {
+            const newState = Object.assign({}, state);
+            let a = newState;
+            let b;
+            const path = action.payload;
+            for(var i=0; i<path.length; i++) {
+                b = a;
+                a = a[path[i]];
+            }
+            console.log(a);
+            if (a.type === "file") {
+                const fileBarPaths = [...newState.path];
+                const newPaths = fileBarPaths.filter(p => !(p.equals(path)));
+                if (newState.activePath.equals(path)) {
+                    newState.activePath = [];
+                }
+                newState.path = newPaths;
+            }
+            if (path[path.length-1] != 'Root') {
+                delete b[path[path.length-1]];
+            }
+            return newState;
+            break; 
+        }
 
         default:
             return state;

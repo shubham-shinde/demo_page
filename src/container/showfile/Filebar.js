@@ -16,7 +16,7 @@ class Filebar extends React.Component{
     }
     
     render() {
-        const arr = this.props.filebarReducer;
+        const arr = this.props.updateReducer.path;
         return(
             <ul id = "file_bar">
                 {arr.map(this.contentOfFilebar,{ self: this,remove_from_filebar})}
