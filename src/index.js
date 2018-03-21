@@ -2,11 +2,11 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
-import Root from './Root';
+import Route from './container/route';
 
 ReactDOM.render(
     <Provider store = {store}>
-    <Root />
+    <Route />
     </Provider>,
     document.getElementById("app")
 );
@@ -21,6 +21,10 @@ Array.prototype.equals = function(arr) {
             if(!this[i].equals(arr[i]))
                 return false;
         }
+        if(this[i] instanceof Object && arr[i] instanceof Object) {
+            if(!this[i].equals(arr[i]))
+                return false;
+        }
         else if (this[i] != arr[i])
             return false;
     }
@@ -28,4 +32,40 @@ Array.prototype.equals = function(arr) {
 };
 
 Object.defineProperty(Array.prototype, "equals", {enumerable: false});
-console.log([1].equals([1]));
+
+Object.prototype.equals = function(obj) {
+    for (var prop in this) {
+        if (this.hasOwnProperty(prop) != obj.hasOwnProperty(prop)) {
+            return false;
+        }
+        else if (typeof this[prop] != typeof obj[prop]) {
+            return false;
+        }
+    }
+
+    for (var prop in obj) {
+        if (this.hasOwnProperty(prop) != obj.hasOwnProperty(prop)) {
+            return false;
+        }
+        else if (typeof this[prop] != typeof obj[prop]) {
+            return false;
+        }
+        if (!this.hasOwnProperty(prop))
+        continue;
+
+        if (this[prop] instanceof Array && obj[prop] instanceof Array) {
+            if (!this[prop].equals(obj[prop]))
+            return false;
+        }
+
+        else if (this[prop] instanceof Object && obj[prop] instanceof Object) {
+            if (!this[prop].equals(obj[prop]))
+            return false;
+        }
+
+        else if (this[prop] != obj[prop]) {
+            return false;
+        }
+    }
+    return true;
+}
