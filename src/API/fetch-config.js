@@ -1,5 +1,5 @@
-import lService from '../services/ls-service';
-const ls = lService();
+// import lService from '../services/ls-service';
+// const ls = lService();
 import * as appConfigs from '../app-config';
 
 const fetchConfig = (method, load) => {
@@ -9,10 +9,10 @@ const fetchConfig = (method, load) => {
   //some new text added want to add more, need more testing
   headers.append('Accept', 'application/json');
   // headers.append('Access-Control-Allow-Origin', url);
-  const authToken = ls.get(appConfigs.TOKEN_NAME);
-  if (authToken) {
-    headers.append(appConfigs.TOKEN_NAME, authToken);
-  }
+  // const authToken = ls.get(appConfigs.TOKEN_NAME);
+  // if (authToken) {
+  //   headers.append(appConfigs.TOKEN_NAME, authToken);
+  // }
 
   const config = {
     method: method,

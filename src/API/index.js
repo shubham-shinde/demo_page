@@ -1,5 +1,5 @@
 import * as config from '../app-config';
-import configs from './fetch-configs';
+import configs from './fetch-config';
 
 const Api = () => {
   return {
@@ -10,11 +10,12 @@ const Api = () => {
   function _get(path) {
     const promise = new Promise((resolve, reject) => {
       const serverPath = config.SERVER_URL + path;
+      console.log(config.SERVER_URL);
       const fetchConfigs = configs('get');
       fetch(serverPath, fetchConfigs).then((response) => {
         return response.json();
       }).then((data) => {
-        console.log(data)
+        // console.log(data)
         return resolve(data);
       }).catch((err) => {
         return reject(err);
