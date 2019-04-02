@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Apstract Demo</title>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137056773-1"></script>
+  <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+  
+   gtag('config', 'UA-137056773-1');
+  </script>
+
+  <!-- <link rel="stylesheet" href="./css/bootstrap.css"> -->
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/introjs.css">
+  <link rel="stylesheet" href="./css/introjs-dark.css">
+
+</head>
+
+<body>
+  <script type="text/javascript" src="js/intro.js"></script>
+  <style>
+    @media (max-width: 1800px) {
+      .h2_mob {
+        font-size: 18px;
+        margin: 0;
+        width: 45%;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+      .sm-font {
+        font-size: 30px;
+      }
+    }
+  </style>
+  <h1 class="sm-font">
+    <span class="blue">&lt;</span>Demo<span class="blue">&gt;</span> <span class="yellow">Apstract</pan>
+  </h1>
+  <h2 class="h2_mob">This game was built using our developer toolkits on Unity. All direct purchases and asset trades are linked across
+    the app, server and EOS blockchain using custom APIs. </h2>
+  <div class="btnwrapper">
+    <a href="#" class="callbtn" href="javascript:void(0);" onclick="javascript:introJs().start();">Take a tour!</a>
+  </div>
+  <section class='bottom-sec container-fluid row'>
+    <div class="col-8">
+      <div 
+        data-step="1"
+        data-intro="Interact with the emulator to experience frictionless sunchronization between the app and blockchain"
+      >
+      <center>
+        <iframe 
+          data-step="7" 
+          data-position:"right"
+          data-intro="A user has already been created for you. Click on 'STORE' to buy and open packs. Click on 'COLLECTION' to see the cards you have. Press DONE and continue exploring."
+          src="https://appetize.io/embed/j061gpjbxhwu4e1ct19q9yt91c?device=nexus5&scale=100&autoplay=true&orientation=landscape&deviceColor=black&xdocMsg=true"
+          width="795px" 
+          height="400px" 
+          frameborder="0" 
+          scrolling="no"
+        ></iframe>
+        <!-- </img> -->
+        </center>
+      </div>
+      <!-- width="795px" 
+      height="400px"  -->
+      <table class="container-fluid tableparent">
+          <div class="alert alert-danger">
+            Switching from Kyling testnet to EOS mainnet. So, table updates are paused.
+          </div>
+          <thead>
+            <tr data-step="3" data-intro="A player can see his current game assets on blockchain">
+              <th>
+                <h1>User ID</h1>
+              </th>
+              <th>
+                <h1 data-step="4" data-intro="Here's the username of the player">Username</h1>
+              </th>
+              <th>
+                <h1 data-step="5" data-intro="Here are the different cards he owns">CardsID</h1>
+              </th>
+              <th>
+                <h1 data-step="6" data-intro="These IDs represent ownership of the user over the cards">packID</h1>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td id="userName">User1</td>
+              <td id="cards">{ 2 , 13 , 15 , 4, 7 , 9 }</td>
+              <td id="packs">{ 1 , 2 , 3 , 4 , 5 , 6 }</td>
+            </tr>
+          </tbody>
+        </table>
+      
+      
+    </div>
+    <section class="col-4 column">
+      <h1 data-step="2"
+        data-intro="Watch out for the logger to see current and previous states of the game on blockchain">Logger</h1>
+      <ul id="logs">
+        <li><code>var log = new Logger();</code></li>
+        <li class=log-info>
+          <code>log.info("Calling contract to add a new user with name", user1)</code>
+          <code symbol="і">Creating user on blockchain and syncing with database. Username : <strong>user1</strong></code>
+        </li>
+        <li class=log-info>
+          <code>log.info("Calling contract to add a new user with name", user1)</code>
+          <code symbol="і">Creating user on blockchain and syncing with database. Username : <strong>user1</strong></code>
+        </li>
+        <li class=log-pass>
+          <code>log.pass("Transaction successful")</code>
+          <code symbol="✓">New user account has been created</code>
+        </li>
+        <li class=log-pass>
+          <code>log.pass("Transaction successful")</code>
+          <code symbol="✓">Cards added to collection</code>
+        </li>
+        <li class=log-warn>
+          <code>log.warn("Suspending contract due to low resource allocation")</code>
+          <code symbol="◬">Assign more RAM and CPU for the contract</code>
+        </li>
+        <li class=log-fail>
+          <code>log.fail("Contract has been suspended")</code>
+          <code symbol="!">Please try again in a while.</code>
+        </li>
+      </ul>
+    </section>
+
+  </section>
+  <!-- <table class="container">
+    <thead>
+      <tr data-step="3" data-intro="A player can see his current game assets on blockchain">
+        <th>
+          <h1>User ID</h1>
+        </th>
+        <th>
+          <h1 data-step="4" data-intro="Here's the username of the player">Username</h1>
+        </th>
+        <th>
+          <h1 data-step="5" data-intro="Here are the different cards he owns">CardsID</h1>
+        </th>
+        <th>
+          <h1 data-step="6" data-intro="These IDs represent ownership of the user over the cards">IssueNo</h1>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>User1</td>
+        <td>{ 2 , 13 , 15 , 4, 7 , 9 }</td>
+        <td>{ 1 , 2 , 3 , 4 , 5 , 6 }</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>User2</td>
+        <td>{ 14 , 7 , 6 , 11 , 13 , 7 }</td>
+        <td>{ 7 , 8 , 9 , 10 , 11 , 12 }</td>
+      </tr>
+    </tbody>
+  </table> -->
+  <div class="pure-container" data-effect="pure-effect-slide">
+    <input type="checkbox" id="pure-toggle-left" class="pure-toggle" data-toggle="left" />
+
+    <label class="pure-toggle-label" for="pure-toggle-left" data-toggle-label="left"><span
+        class="pure-toggle-icon"></span></label>
+
+    <nav class="pure-drawer" data-position="left">
+      <h1 style="color:#1fc08e;font-size:2em;font-weight: 700;position: absolute;top: 10%;left: 10%;">Block Explorer
+      </h1>
+
+    </nav>
+
+    <label class="pure-overlay" for="pure-toggle-left" data-overlay="left"></label>
+
+  </div>
+
+
+  <!-- <div 
+    style="position: absolute;left: 25%;top: 25%;" 
+    data-step="1"
+    data-intro="Interact with the emulator to experience frictionless sunchronization between the app and blockchain"
+  >
+    <iframe data-step="7" data-position:"right"
+      data-intro="A user has already been created for you. Click on 'STORE' to buy and open packs. Click on 'COLLECTION' to see the cards you have. Press DONE and continue exploring."
+      src="https://appetize.io/embed/k8zjydh30xextm4qa1273zvdzw?device=nexus5&scale=100&autoplay=true&orientation=landscape&deviceColor=black&xdocMsg=true"
+      width="795px" height="400px" frameborder="0" scrolling="no"></iframe></img></div>
+   -->
+  
+
+  <script src='https://codepen.io/jakealbaugh/pen/WvNjZB.js'></script>
+  <script src="./js/eos.js"></script>
+
+
+</body>
+
+</html>
