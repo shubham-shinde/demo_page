@@ -37,7 +37,7 @@ app.get('/user', (req,res, next) => {
     eos.getTableRows(1, "user2account", "user2account", "user", "key", "0", "-1", 5).then(result => res.send(result));
 })
 
-app.listen(80, (err) => {
+app.listen(3000, (err) => {
     if(err) console.log("server can't start due to ::::" + err);
-    else console.log("server is running on the port ::::" + 80);
+    else console.log("server is running on the port ::::" + 3000);
 })
